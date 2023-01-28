@@ -17,8 +17,6 @@ const generateTeam = (team) => {
     </div>
         `;
 
-  console.log(generateManager("test"));
-
   // creates the html for engineers
   const generateEngineer = (engineer) => `
         <div class="card employee-card">
