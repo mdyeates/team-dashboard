@@ -1,84 +1,64 @@
 const inquirer = require("inquirer");
+const { validateLength, validateEmail, validateLengthAndNumber } = require("./validateInput");
 
-const { validateLength, validateEmail, validateNumber } = require("./validate");
+// Prompts for general information
+const generalPrompts = (position) => [
+  {
+    name: "name",
+    message: `Enter the full name of the ${position}:`,
+    validate: validateLength,
+  },
+  {
+    name: "id",
+    message: `Enter the ${position}'s unique ID number:`,
+    validate: validateLengthAndNumber,
+  },
+  {
+    name: "email",
+    message: `Enter the ${position}'s email address:`,
+    validate: validateEmail,
+  },
+];
 
+// Prompts for independent manager information
 const managerPrompts = () =>
   inquirer.prompt([
-    {
-      name: "name",
-      message: "Please enter manager name:",
-      validate: validateLength,
-    },
-    {
-      name: "id",
-      message: "Please enter an ID:",
-      validate: validateLength,
-    },
-    {
-      name: "email",
-      message: "Please enter manager's email address:",
-      validate: validateEmail,
-    },
+    ...generalPrompts("Manager"),
     {
       name: "officeNumber",
-      message: "Please enter manager's office number:",
-      validate: validateNumber,
+      message: "Enter the Manager's office number:",
+      validate: validateLengthAndNumber,
     },
   ]);
 
+// Prompts for independent engineer information
 const engineerPrompts = () =>
   inquirer.prompt([
-    {
-      name: "name",
-      message: "Please enter engineer name:",
-      validate: validateLength,
-    },
-    {
-      name: "id",
-      message: "Please enter engineer ID:",
-      validate: validateLength,
-    },
-    {
-      name: "email",
-      message: "Please enter engineer's email address:",
-      validate: validateEmail,
-    },
+    ...generalPrompts("Engineer"),
     {
       name: "github",
-      message: "Please enter engineer's GitHub username:",
+      message: "Enter the Engineer's GitHub username:",
       validate: validateLength,
     },
   ]);
 
+// Prompts for independent intern information
 const internPrompts = () =>
   inquirer.prompt([
-    {
-      name: "name",
-      message: "Please enter intern name:",
-      validate: validateLength,
-    },
-    {
-      name: "id",
-      message: "Please enter intern ID:",
-      validate: validateLength,
-    },
-    {
-      name: "email",
-      message: "Please enter intern's email address:",
-      validate: validateEmail,
-    },
+    ...generalPrompts("Intern"),
     {
       name: "school",
-      message: "Please enter intern's school name:",
+      message: "Enter the Intern's school name:",
       validate: validateLength,
     },
   ]);
 
+// Prompt to add an employee or save and exit the program
 const menuPrompt = () =>
   inquirer.prompt({
     type: "list",
     name: "option",
-    message: "Please choose an option.",
+    message: "Please select an option:",
     choices: [
       { name: "Add an Engineer", value: "engineer" },
       { name: "Add an Intern", value: "intern" },
