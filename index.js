@@ -13,22 +13,26 @@ const team = [];
 
 function generateManager() {
   return managerPrompts().then(({ name, id, email, officeNumber }) => {
-    team.push(new Manager(name, id, email, officeNumber));
+    const manager = new Manager(name, id, email, officeNumber);
+    team.push(manager);
   });
 }
 
 function generateEngineer() {
   return engineerPrompts().then(({ name, id, email, github }) => {
-    team.push(new Engineer(name, id, email, github));
+    const engineer = new Engineer(name, id, email, github);
+    team.push(engineer);
   });
 }
 
 function generateIntern() {
   return internPrompts().then(({ name, id, email, school }) => {
-    team.push(new Intern(name, id, email, school));
+    const intern = new Intern(name, id, email, school);
+    team.push(intern);
   });
 }
 
+// Prompt user to add an employee or save and exit the program
 async function showMainMenu() {
   const outputPath = path.resolve(__dirname, "output", "team.html");
 
@@ -39,15 +43,16 @@ async function showMainMenu() {
   };
 
   const { option } = await menuPrompt();
-  const action = menuMap[option];
 
-  await action();
+  const selectedOption = menuMap[option];
+  await selectedOption();
 
   if (option === "exit") return;
 
   showMainMenu();
 }
 
+// Function to initialise the program
 (function init() {
   console.log(
     "--------------------------------------------------------\nPlease fill in the following details to create your team\n--------------------------------------------------------"

@@ -1,5 +1,4 @@
 // Validate user input
-
 const validateLength = (input) => (input.length > 0 ? true : "Please enter at least one character");
 
 const validateEmail = (email) =>
@@ -7,4 +6,12 @@ const validateEmail = (email) =>
 
 const validateNumber = (input) => (Number.isNaN(Number(input)) ? "Please enter a valid number." : true);
 
-module.exports = { validateLength, validateEmail, validateNumber };
+const validateLengthAndNumber = (input) => {
+  if (validateLength(input) === true && validateNumber(input) === true) {
+    return true;
+  }
+
+  return "Please enter at least one valid number";
+};
+
+module.exports = { validateLength, validateEmail, validateLengthAndNumber };
