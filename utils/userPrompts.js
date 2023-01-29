@@ -74,7 +74,7 @@ const internPrompts = () =>
     },
   ]);
 
-const menuPrompts = () =>
+const menuPrompt = () =>
   inquirer.prompt({
     type: "list",
     name: "option",
@@ -86,4 +86,4 @@ const menuPrompts = () =>
     ],
   });
 
-module.exports = { managerPrompts, engineerPrompts, internPrompts, menuPrompts };
+module.exports = { managerPrompts, engineerPrompts, internPrompts, menuPrompt };

@@ -4,7 +4,7 @@ const path = require("path");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const { managerPrompts, engineerPrompts, internPrompts, menuPrompts } = require("./utils/userPrompts");
+const { managerPrompts, engineerPrompts, internPrompts, menuPrompt } = require("./utils/userPrompts");
 const render = require("./src/page-template");
 const writeToFile = require("./utils/writeFile");
 
@@ -32,28 +32,27 @@ function generateIntern() {
 async function showMainMenu() {
   const outputPath = path.resolve(__dirname, "output", "team.html");
 
-  const { option } = await menuPrompts();
-  switch (option) {
-    case "engineer":
-      await generateEngineer();
-      showMainMenu();
-      break;
-    case "intern":
-      await generateIntern();
-      showMainMenu();
-      break;
-    case "exit":
-      writeToFile(outputPath, render(team));
-      break;
-    default:
-      console.error("Invalid option selected");
-      showMainMenu();
-  }
+  const menuMap = {
+    engineer: generateEngineer,
+    intern: generateIntern,
+    exit: () => writeToFile(outputPath, render(team)),
+  };
+
+  const { option } = await menuPrompt();
+  const action = menuMap[option];
+
+  await action();
+
+  if (option === "exit") return;
+
+  showMainMenu();
 }
 
 (function init() {
   console.log(
     "--------------------------------------------------------\nPlease fill in the following details to create your team\n--------------------------------------------------------"
   );
+
+  // Prompt user to create a manager first, and then show the menu to add another employee
   generateManager().then(showMainMenu);
 })();
