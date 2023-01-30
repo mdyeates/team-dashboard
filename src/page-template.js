@@ -2,8 +2,9 @@
 const generateTeam = (team) => {
   // creates the manager html
   const generateManager = (manager) => `
+  <div class="col-sm-6 col-md-4">
         <div class="card employee-card">
-        <div class="card-header">
+        <div class="card-header manager-header">
             <h2 class="card-title">${manager.getName()}</h2>
             <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
         </div>
@@ -15,10 +16,12 @@ const generateTeam = (team) => {
             </ul>
         </div>
     </div>
+  </div>  
         `;
 
   // creates the html for engineers
   const generateEngineer = (engineer) => `
+  <div class="col-sm-6 col-md-4">
         <div class="card employee-card">
     <div class="card-header">
         <h2 class="card-title">${engineer.getName()}</h2>
@@ -32,10 +35,12 @@ const generateTeam = (team) => {
         </ul>
     </div>
 </div>
+</div>
         `;
 
   // creates the html for interns
   const generateIntern = (intern) => `
+  <div class="col-sm-6 col-md-4">
         <div class="card employee-card">
     <div class="card-header">
         <h2 class="card-title">${intern.getName()}</h2>
@@ -48,6 +53,7 @@ const generateTeam = (team) => {
             <li class="list-group-item">School: ${intern.getSchool()}</li>
         </ul>
     </div>
+</div>
 </div>
         `;
 
@@ -82,7 +88,7 @@ module.exports = (team) => `
     <title>My Team</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <script src="https://kit.fontawesome.com/c502137733.js"></script>
 </head>
 
@@ -96,7 +102,7 @@ module.exports = (team) => `
     </div>
     <div class="container">
         <div class="row">
-            <div class="team-area col-12 d-flex justify-content-center">
+            <div class="team-area col-12 d-flex flex-wrap justify-content-center">
                 ${generateTeam(team)}
             </div>
         </div>

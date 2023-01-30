@@ -7,4 +7,15 @@ function writeToFile(fileName, data) {
   );
 }
 
-module.exports = writeToFile;
+const createTeam = (function () {
+  const team = [];
+
+  return {
+    addToTeam: (member) => {
+      team.push(member);
+    },
+    getTeam: () => team,
+  };
+})();
+
+module.exports = { writeToFile, createTeam };

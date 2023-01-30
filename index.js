@@ -6,29 +6,26 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const { managerPrompts, engineerPrompts, internPrompts, menuPrompt } = require("./utils/userPrompts");
 const render = require("./src/page-template");
-const writeToFile = require("./utils/writeFile");
-
-// Empty array to store team members
-const team = [];
+const { writeToFile, createTeam } = require("./utils/helpers");
 
 function generateManager() {
   return managerPrompts().then(({ name, id, email, officeNumber }) => {
     const manager = new Manager(name, id, email, officeNumber);
-    team.push(manager);
+    createTeam.addToTeam(manager);
   });
 }
 
 function generateEngineer() {
   return engineerPrompts().then(({ name, id, email, github }) => {
     const engineer = new Engineer(name, id, email, github);
-    team.push(engineer);
+    createTeam.addToTeam(engineer);
   });
 }
 
 function generateIntern() {
   return internPrompts().then(({ name, id, email, school }) => {
     const intern = new Intern(name, id, email, school);
-    team.push(intern);
+    createTeam.addToTeam(intern);
   });
 }
 
@@ -39,7 +36,7 @@ async function showMainMenu() {
   const menuMap = {
     engineer: generateEngineer,
     intern: generateIntern,
-    exit: () => writeToFile(outputPath, render(team)),
+    exit: () => writeToFile(outputPath, render(createTeam.getTeam())),
   };
 
   const { option } = await menuPrompt();
