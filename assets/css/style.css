@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* VARIABLES */
+:root {
+  --primary: #121212;
+  --secondary: #191919;
+  --tertiary: #1c1c1c;
+  --white: #fffffe;
+  --transition: all 0.3s ease-out;
+}
+
+/* CUSTOM STYLES */
+body {
+  background: var(--primary);
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+}
+
+.team-heading {
+  background: var(--tertiary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 50px !important;
+}
+
+.card-header {
+  background: #242424;
+}
+
+.manager-header {
+  background-color: #161616;
+}
+
+.list-group-item {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  margin-bottom: 10px;
+  background: var(--tertiary);
+}
+
+.employee-card {
+  margin: 0 10px 20px;
+  background: var(--secondary);
+  transition: var(--transition);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.employee-card:hover {
+  transform: translateY(-10px);
+}
