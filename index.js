@@ -8,6 +8,7 @@ const { managerPrompts, engineerPrompts, internPrompts, menuPrompt } = require("
 const render = require("./src/page-template");
 const { writeToFile, createTeam } = require("./utils/helpers");
 
+// Functions to generate employees
 function generateManager() {
   return managerPrompts().then(({ name, id, email, officeNumber }) => {
     const manager = new Manager(name, id, email, officeNumber);
