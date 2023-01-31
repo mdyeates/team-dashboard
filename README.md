@@ -126,56 +126,88 @@ To get a local copy up and running follow these simple example steps.
   <!-- USAGE EXAMPLES -->
   
   ## Usage
-  
-  ### Functionality
-  
-  - The following animation demonstrates the applications functionality
-  
-    [![Functionality Gif][functionality-gif]](https://drive.google.com/file/d/1_atUXTM-L9r4NccsrPaaWqPyNu37ftwH/view)
 
-  <p align="right"><a href="#readme-top">back to top</a></p>
-  
-  ### Mobile Responsive
-  
-  - As demonstrated in the screenshot below, this application is designed to be responsive and adjust seamlessly to fit various screen sizes
-  
-    [![Responsiveness Screenshot][responsive-screenshot]](https://drive.google.com/file/d/1_atUXTM-L9r4NccsrPaaWqPyNu37ftwH/view)
-  
-  <p align="right"><a href="#readme-top">back to top</a></p>
+- For this project, I learnt about OOP principles, modularisation and closure. The code block below defines a closure used in this app, which is an inner function that has access to variables in an outer function even after the outer function returns. This closure is made by enclosing the function definition in an Immediately Invoked Function Expression (IIFE) (which is invoked immediately when the code is executed).
 
-  <!-- LICENSE -->
+- The `createTeam` function has a private variable called `team` defined within the closure and is accessible only to other functions defined within the same closure. The closure provides two methods for accessing the private `team` array: `addToTeam` and `getTeam`.
+
+- `addToTeam` accepts a team member as an argument and uses the push method to add it to the team array. `getTeam` returns the `team` array, allowing access to the members who have been added.
+
+- The closure acts like a "backpack" that carries the private information in `team` and the methods `addToTeam` and `getTeam` with it, allowing these variables and functions to persist even after the closure has been executed.
+
+```js
+const createTeam = (function () {
+  const team = [];
+
+  return {
+    addToTeam: (member) => {
+      team.push(member);
+    },
+    getTeam: () => team,
+  };
+})();
+```
+
+- The functions and state defined within the closure can be easily reused across multiple parts of the codebase while maintaining their privacy and encapsulation, this improves code reuse, security, organisation and readability.
+
+```js
+function generateIntern() {
+  return internPrompts().then(({ name, id, email, school }) => {
+    const intern = new Intern(name, id, email, school);
+    createTeam.addToTeam(intern);
+  });
+}
+```
+
+### Functionality
+
+- The following animation demonstrates the applications functionality
+
+[![Functionality Gif][functionality-gif]](https://drive.google.com/file/d/1_atUXTM-L9r4NccsrPaaWqPyNu37ftwH/view)
+
+<p align="right"><a href="#readme-top">back to top</a></p>
+
+### Mobile Responsive
+
+- As demonstrated in the screenshot below, this application is designed to be responsive and adjust seamlessly to fit various screen sizes
+
+[![Responsiveness Screenshot][responsive-screenshot]](https://drive.google.com/file/d/1_atUXTM-L9r4NccsrPaaWqPyNu37ftwH/view)
+
+<p align="right"><a href="#readme-top">back to top</a></p>
+
+<!-- LICENSE -->
 
 ## License
 
 Distributed under the MIT License. See `LICENSE.md` for more information.
 
-  <p align="right"><a href="#readme-top">back to top</a></p>
-  
-  <!-- CONTRIBUTING -->
-  
-  ## Contributing
-  
-  Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-  
-  If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-  Don't forget to give the project a star! Thanks again!
-  
-  1. Fork the Project
-  2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-  3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-  4. Push to the Branch (`git push origin feature/AmazingFeature`)
-  5. Open a Pull Request
-  
-  <p align="right"><a href="#readme-top">back to top</a></p>
+<p align="right"><a href="#readme-top">back to top</a></p>
 
-  <!-- TESTS -->
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right"><a href="#readme-top">back to top</a></p>
+
+<!-- TESTS -->
 
 ## Tests
 
 This app utilises Jest. Simply run the command below to confirm that every aspect of your code passes the provided tests
 
 ```sh
-   npm test
+npm test
 ```
 
   <p align="right"><a href="#readme-top">back to top</a></p>
